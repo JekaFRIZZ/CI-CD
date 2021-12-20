@@ -1,0 +1,39 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.8-SNAPSHOT'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	/*id "org.sonarqube" version "3.3"*/
+}
+
+group = 'com.epam.esm'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
+}
+
+jar {
+	manifest {
+		attributes "Main-Class" : "com.epam.esm.DemoApplication"
+	}
+}
+
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+
+	implementation project(':core')
+}
+
+test {
+	useJUnitPlatform()
+}
