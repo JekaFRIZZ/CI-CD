@@ -32,7 +32,7 @@ class GiftCertificateServiceTest {
     private final Map<String, String> map = new HashMap<>();
 
     @Test
-    protected void testShouldGetAllGiftCertificatesWhenCorrectPaginateParamApplied() {
+    void testShouldGetAllGiftCertificatesWhenCorrectPaginateParamApplied() {
         int limit = 3;
         int offset = 2;
         giftCertificate.setId(giftCertificateId);
@@ -44,7 +44,7 @@ class GiftCertificateServiceTest {
     }
 
     @Test
-    protected void testShouldGetGiftCertificateById() {
+    void testShouldGetGiftCertificateById() {
         giftCertificate.setId(giftCertificateId);
         when(mockGiftCertificateRepository.getById(giftCertificateId)).thenReturn(optionalGiftCertificate);
 
@@ -54,7 +54,7 @@ class GiftCertificateServiceTest {
     }
 
     @Test
-    protected void testShouldThrowExceptionWhenNonExistentGiftApplied() {
+    void testShouldThrowExceptionWhenNonExistentGiftApplied() {
         assertThrows(ResourceExistenceException.class, () -> {
             when(mockGiftCertificateRepository.getById(giftCertificateId)).thenReturn(Optional.empty());
 
@@ -63,7 +63,7 @@ class GiftCertificateServiceTest {
     }
 
     @Test
-    protected void testShouldThrowExceptionWhenGiftNotFoundById() {
+    void testShouldThrowExceptionWhenGiftNotFoundById() {
         assertThrows(ResourceExistenceException.class, () -> {
             when(mockGiftCertificateRepository.getById(giftCertificateId)).thenReturn(Optional.empty());
 
@@ -72,7 +72,7 @@ class GiftCertificateServiceTest {
     }
 
     @Test
-    protected void testShouldThrowExceptionWhenDeleteNonExistentTag() {
+    void testShouldThrowExceptionWhenDeleteNonExistentTag() {
         assertThrows(ResourceExistenceException.class, () -> {
             when(mockGiftCertificateRepository.getById(giftCertificateId)).thenReturn(Optional.empty());
 

@@ -30,7 +30,7 @@ class UserServiceTest {
     private final Optional<User> optionalUser = Optional.of(user);
 
     @Test
-    protected void testShouldGetAllUsersWhenCorrectPaginateParamApplied() {
+    void testShouldGetAllUsersWhenCorrectPaginateParamApplied() {
         int limit = 5;
         int offset = 2;
         Mockito.when(mockUserRepository.getAll(limit, offset)).thenReturn(users);
@@ -41,7 +41,7 @@ class UserServiceTest {
     }
 
     @Test
-    protected void testShouldThrowExceptionWhenIncorrectPaginateParamApplied() {
+    void testShouldThrowExceptionWhenIncorrectPaginateParamApplied() {
         assertThrows(IllegalArgumentException.class, () -> {
             int limit = -5;
             int offset = -5;
@@ -51,7 +51,7 @@ class UserServiceTest {
     }
 
     @Test
-    protected void testShouldGetUserById() {
+    void testShouldGetUserById() {
         Mockito.when(mockUserRepository.getById(userId)).thenReturn(optionalUser);
 
         User actual = userService.getById(userId);
@@ -60,7 +60,7 @@ class UserServiceTest {
     }
 
     @Test
-    protected void testShouldThrowExceptionWhenNonExistentUserApplied() {
+    void testShouldThrowExceptionWhenNonExistentUserApplied() {
         Assertions.assertThrows(ResourceExistenceException.class, () -> {
             when(mockUserRepository.getById(userId)).thenReturn(Optional.empty());
 
@@ -69,7 +69,7 @@ class UserServiceTest {
     }
 
     @Test
-    protected void testShouldDoNothingWhenDeleteUser() {
+    void testShouldDoNothingWhenDeleteUser() {
         when(mockUserRepository.getById(userId)).thenReturn(optionalUser);
         doNothing().when(mockUserRepository).deleteById(user);
 
@@ -77,7 +77,7 @@ class UserServiceTest {
     }
 
     @Test
-    protected void testShouldThrowExceptionWheNonExistentUserApplied() {
+    void testShouldThrowExceptionWheNonExistentUserApplied() {
         Assertions.assertThrows(ResourceExistenceException.class, () -> {
             when(mockUserRepository.getById(userId)).thenReturn(Optional.empty());
 
