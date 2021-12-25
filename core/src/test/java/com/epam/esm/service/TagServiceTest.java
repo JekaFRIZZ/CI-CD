@@ -40,10 +40,9 @@ class TagServiceTest {
 
     @Test
     void testShouldThrowExceptionWhenIncorrectPaginateParamApplied() {
+        int limit = -5;
+        int offset = -5;
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            int limit = -5;
-            int offset = -5;
-
             tagService.getAll(limit, offset);
         });
     }
@@ -77,9 +76,8 @@ class TagServiceTest {
 
     @Test
     void testGetByNameShouldThrowExceptionWhenNonExistentTagApplied() {
+        when(mockTagRepository.getByName(name)).thenReturn(Optional.empty());
         Assertions.assertThrows(ResourceExistenceException.class, () -> {
-            when(mockTagRepository.getByName(name)).thenReturn(Optional.empty());
-
             tagService.getByName(name);
         });
     }
@@ -99,10 +97,9 @@ class TagServiceTest {
 
     @Test
     void testShouldThrowExceptionWhenTagWithSameNameExistsApplied() {
+        tagDTO.setName(name);
+        when(mockTagRepository.getByName(name)).thenReturn(Optional.of(tag));
         Assertions.assertThrows(DuplicateResourceException.class, () -> {
-            tagDTO.setName(name);
-            when(mockTagRepository.getByName(name)).thenReturn(Optional.of(tag));
-
             tagService.create(tagDTO);
         });
     }
@@ -117,9 +114,8 @@ class TagServiceTest {
 
     @Test
     void testDeleteByIdShouldThrowExceptionWhenDeleteNonExistentTag() {
+        when(mockTagRepository.getById(tagId)).thenReturn(Optional.empty());
         Assertions.assertThrows(ResourceExistenceException.class, () -> {
-            when(mockTagRepository.getById(tagId)).thenReturn(Optional.empty());
-
             tagService.deleteById(tagId);
         });
     }

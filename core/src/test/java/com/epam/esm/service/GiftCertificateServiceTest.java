@@ -55,27 +55,27 @@ class GiftCertificateServiceTest {
 
     @Test
     void testShouldThrowExceptionWhenNonExistentGiftApplied() {
-        assertThrows(ResourceExistenceException.class, () -> {
-            when(mockGiftCertificateRepository.getById(giftCertificateId)).thenReturn(Optional.empty());
+        when(mockGiftCertificateRepository.getById(giftCertificateId)).thenReturn(Optional.empty());
 
+        assertThrows(ResourceExistenceException.class, () -> {
             giftCertificateService.getById(giftCertificateId);
         });
     }
 
     @Test
     void testShouldThrowExceptionWhenGiftNotFoundById() {
-        assertThrows(ResourceExistenceException.class, () -> {
-            when(mockGiftCertificateRepository.getById(giftCertificateId)).thenReturn(Optional.empty());
+        when(mockGiftCertificateRepository.getById(giftCertificateId)).thenReturn(Optional.empty());
 
+        assertThrows(ResourceExistenceException.class, () -> {
             giftCertificateService.getById(giftCertificateId);
         });
     }
 
     @Test
     void testShouldThrowExceptionWhenDeleteNonExistentTag() {
-        assertThrows(ResourceExistenceException.class, () -> {
-            when(mockGiftCertificateRepository.getById(giftCertificateId)).thenReturn(Optional.empty());
+        when(mockGiftCertificateRepository.getById(giftCertificateId)).thenReturn(Optional.empty());
 
+        assertThrows(ResourceExistenceException.class, () -> {
             giftCertificateService.deleteById(giftCertificateId);
         });
     }

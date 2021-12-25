@@ -61,9 +61,8 @@ class UserServiceTest {
 
     @Test
     void testShouldThrowExceptionWhenNonExistentUserApplied() {
+        when(mockUserRepository.getById(userId)).thenReturn(Optional.empty());
         Assertions.assertThrows(ResourceExistenceException.class, () -> {
-            when(mockUserRepository.getById(userId)).thenReturn(Optional.empty());
-
             userService.getById(userId);
         });
     }
@@ -78,9 +77,8 @@ class UserServiceTest {
 
     @Test
     void testShouldThrowExceptionWheNonExistentUserApplied() {
+        when(mockUserRepository.getById(userId)).thenReturn(Optional.empty());
         Assertions.assertThrows(ResourceExistenceException.class, () -> {
-            when(mockUserRepository.getById(userId)).thenReturn(Optional.empty());
-
             userService.deleteById(userId);
         });
     }
