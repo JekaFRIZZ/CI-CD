@@ -27,7 +27,7 @@ class TagServiceTest {
     private final Optional<Tag> optionalTag = Optional.of(tag);
 
     @Test
-    public void testShouldGetAllTagsWhenCorrectPaginateParamApplied() {
+    protected void testShouldGetAllTagsWhenCorrectPaginateParamApplied() {
         int limit = 5;
         int offset = 1;
 
@@ -39,7 +39,7 @@ class TagServiceTest {
     }
 
     @Test
-    public void testShouldThrowExceptionWhenIncorrectPaginateParamApplied() {
+    protected void testShouldThrowExceptionWhenIncorrectPaginateParamApplied() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             int limit = -5;
             int offset = -5;
@@ -49,7 +49,7 @@ class TagServiceTest {
     }
 
     @Test
-    public void testShouldGetTagById() {
+    protected void testShouldGetTagById() {
         when(mockTagRepository.getById(tagId)).thenReturn(optionalTag);
 
         Tag actual = tagService.getById(tagId);
@@ -58,7 +58,7 @@ class TagServiceTest {
     }
 
     @Test
-    public void testShouldThrowExceptionWhenNonExistentTagApplied() {
+    protected void testShouldThrowExceptionWhenNonExistentTagApplied() {
         Assertions.assertThrows(ResourceExistenceException.class, () -> {
             when(mockTagRepository.getById(tagId)).thenReturn(Optional.empty());
 
@@ -67,7 +67,7 @@ class TagServiceTest {
     }
 
     @Test
-    public void testShouldGetTagByName() {
+    protected void testShouldGetTagByName() {
         when(mockTagRepository.getByName(name)).thenReturn(optionalTag);
 
         Tag actual = tagService.getByName(name);
@@ -76,7 +76,7 @@ class TagServiceTest {
     }
 
     @Test
-    public void testGetByNameShouldThrowExceptionWhenNonExistentTagApplied() {
+    protected void testGetByNameShouldThrowExceptionWhenNonExistentTagApplied() {
         Assertions.assertThrows(ResourceExistenceException.class, () -> {
             when(mockTagRepository.getByName(name)).thenReturn(Optional.empty());
 
@@ -85,7 +85,7 @@ class TagServiceTest {
     }
 
     @Test
-    public void testShouldReturnTagIdWhenCreateTag() {
+    protected void testShouldReturnTagIdWhenCreateTag() {
         tagDTO.setName(name);
         doNothing().when(mockTagValidator).validate(tagDTO);
         when(mockTagRepository.getByName(name)).thenReturn(Optional.empty());
@@ -98,7 +98,7 @@ class TagServiceTest {
     }
 
     @Test
-    public void testShouldThrowExceptionWhenTagWithSameNameExistsApplied() {
+    protected void testShouldThrowExceptionWhenTagWithSameNameExistsApplied() {
         Assertions.assertThrows(DuplicateResourceException.class, () -> {
             tagDTO.setName(name);
             when(mockTagRepository.getByName(name)).thenReturn(Optional.of(tag));
@@ -108,7 +108,7 @@ class TagServiceTest {
     }
 
     @Test
-    public void testShouldDoNothingWhenDeleteTagApplied() {
+    protected void testShouldDoNothingWhenDeleteTagApplied() {
         when(mockTagRepository.getById(tagId)).thenReturn(optionalTag);
         doNothing().when(mockTagRepository).deleteById(tag);
 
@@ -116,7 +116,7 @@ class TagServiceTest {
     }
 
     @Test
-    public void testDeleteByIdShouldThrowExceptionWhenDeleteNonExistentTag() {
+    protected void testDeleteByIdShouldThrowExceptionWhenDeleteNonExistentTag() {
         Assertions.assertThrows(ResourceExistenceException.class, () -> {
             when(mockTagRepository.getById(tagId)).thenReturn(Optional.empty());
 
