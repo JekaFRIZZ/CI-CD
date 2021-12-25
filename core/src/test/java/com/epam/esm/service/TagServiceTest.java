@@ -58,9 +58,8 @@ class TagServiceTest {
 
     @Test
     void testShouldThrowExceptionWhenNonExistentTagApplied() {
+        when(mockTagRepository.getById(tagId)).thenReturn(Optional.empty());
         Assertions.assertThrows(ResourceExistenceException.class, () -> {
-            when(mockTagRepository.getById(tagId)).thenReturn(Optional.empty());
-
             tagService.getById(tagId);
         });
     }
@@ -102,14 +101,6 @@ class TagServiceTest {
         Assertions.assertThrows(DuplicateResourceException.class, () -> {
             tagService.create(tagDTO);
         });
-    }
-
-    @Test
-    void testShouldDoNothingWhenDeleteTagApplied() {
-        when(mockTagRepository.getById(tagId)).thenReturn(optionalTag);
-        doNothing().when(mockTagRepository).deleteById(tag);
-
-        tagService.deleteById(tagId);
     }
 
     @Test

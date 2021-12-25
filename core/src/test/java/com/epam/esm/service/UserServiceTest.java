@@ -68,14 +68,6 @@ class UserServiceTest {
     }
 
     @Test
-    void testShouldDoNothingWhenDeleteUser() {
-        when(mockUserRepository.getById(userId)).thenReturn(optionalUser);
-        doNothing().when(mockUserRepository).deleteById(user);
-
-        userService.deleteById(userId);
-    }
-
-    @Test
     void testShouldThrowExceptionWheNonExistentUserApplied() {
         when(mockUserRepository.getById(userId)).thenReturn(Optional.empty());
         Assertions.assertThrows(ResourceExistenceException.class, () -> {
