@@ -52,6 +52,7 @@ class GiftCertificateServiceTest {
 
         assertEquals(giftCertificate, actual);
     }
+
     @Test
     public void testShouldThrowExceptionWhenNonExistentGiftApplied() {
         assertThrows(ResourceExistenceException.class, () -> {
@@ -68,14 +69,6 @@ class GiftCertificateServiceTest {
 
             giftCertificateService.getById(giftCertificateId);
         });
-    }
-
-    @Test
-    public void testDeleteShouldWorkCorrect() {
-        when(mockGiftCertificateRepository.getById(giftCertificateId)).thenReturn(optionalGiftCertificate);
-        doNothing().when(mockGiftCertificateRepository).deleteById(giftCertificate);
-
-        giftCertificateService.deleteById(giftCertificateId);
     }
 
     @Test
