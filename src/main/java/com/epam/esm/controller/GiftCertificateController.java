@@ -87,25 +87,25 @@ public class GiftCertificateController {
      * @param giftCertificate - object which will be updated
      * @return {@link ResponseEntity} with {@link HttpStatus} alone.
      */
-    @PatchMapping(value = "/{id}")
+    /*@PatchMapping(value = "/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> updateById(@PathVariable Integer id, @RequestBody GiftCertificate giftCertificate) {
         giftCertificateService.update(id, giftCertificate);
         return new ResponseEntity<>(giftCertificate, HttpStatus.OK);
     }
 
-    /**
+    *//**
      * Creates {@link GiftCertificate}
      *
      * @param giftCertificateDTO - object that will be converted to {@link GiftCertificate} and save to database
      * @return {@link ResponseEntity} with {@link HttpStatus} alone.
-     */
+     *//*
     @PostMapping()
     public ResponseEntity<?> create(@RequestBody GiftCertificateDTO giftCertificateDTO) {
         Integer giftId = giftCertificateService.create(giftCertificateDTO);
         GiftCertificate giftCertificate = giftCertificateService.getById(giftId);
         return new ResponseEntity<>(giftCertificate, HttpStatus.CREATED);
-    }
+    }*/
 
 
     /**
